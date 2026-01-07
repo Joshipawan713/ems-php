@@ -866,7 +866,7 @@
                         <p>View, search, and manage all employees in the system.</p>
                     </div>
                     <div>
-                        <a href="add-employee.html" class="btn btn-primary">
+                        <a href="add_employee.php" class="btn btn-primary">
                             <i class="fas fa-user-plus me-2"></i>Add New Employee
                         </a>
                     </div>

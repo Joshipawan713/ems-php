@@ -125,9 +125,9 @@ $prevMonthDays = date('t', strtotime("first day of previous month"));
 <style>
 /* ===== ENHANCED CSS ===== */
 .calendar-container { 
-    max-width:1400px; 
-    margin:20px auto; 
-    padding:20px; 
+    max-width:100%;
+    margin:0;
+    padding:0;
     background:#f8f9fa;
 }
 .calendar-header { 

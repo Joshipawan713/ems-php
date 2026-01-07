@@ -1,3 +1,148 @@
+<?php 
+session_start();
+include('database.php');
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+
+$maxsql = mysqli_query($conn, "SELECT MAX(id) as maxid FROM employee");
+$maxrow = mysqli_fetch_array($maxsql);
+$unique_id = "EMP-".$maxrow['maxid']+1;
+
+if(isset($_POST['submit'])){
+    // $uploadDir = "uploads/employee_docs/";
+    $uploadDir = "uploads/employee_docs/".$unique_id."/";
+    if(!is_dir($uploadDir)){
+        mkdir($uploadDir, 0777, true);
+    }
+
+    // Allowed file types
+    $allowedTypes = ['jpg','jpeg','png','webp'];
+
+    function uploadFile($file, $uploadDir, $allowedTypes){
+        if($file['error'] !== 0) return false;
+
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+
+        if(!in_array($ext, $allowedTypes)){
+            return "INVALID_TYPE";
+        }
+
+        $newName = time() . "_" . rand(1000,9999) . "." . $ext;
+        $dest = $uploadDir . $newName;
+
+        if(move_uploaded_file($file['tmp_name'], $dest)){
+            return $newName;
+        }
+        return false;
+    }
+
+    // Upload documents
+    $pan_card = uploadFile($_FILES['pan_card'], $uploadDir, $allowedTypes);
+    $addhar_card = uploadFile($_FILES['addhar_card'], $uploadDir, $allowedTypes);
+    $ten_certficate = uploadFile($_FILES['ten_certficate'], $uploadDir, $allowedTypes);
+    $twelve_certficate = uploadFile($_FILES['twelve_certficate'], $uploadDir, $allowedTypes);
+    $high_certificate = uploadFile($_FILES['high_certificate'], $uploadDir, $allowedTypes);
+
+    $docs = [$pan_card,$addhar_card,$ten_certficate,$twelve_certficate,$high_certificate];
+
+    foreach($docs as $d){
+        if($d === "INVALID_TYPE"){
+            die("❌ Only JPG, JPEG, PNG, WEBP files allowed!");
+        }
+        if($d === false){
+            die("❌ File upload failed!");
+        }
+    }
+
+    // $name = mysqli_real_escape_string($conn, $_POST['name']);
+    // $email = mysqli_real_escape_string($conn, $_POST['email']);
+    // $mobile = mysqli_real_escape_string($conn, $_POST['mobile']);
+    // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    // $department = mysqli_real_escape_string($conn, $_POST['department']);
+    // $address = mysqli_real_escape_string($conn, $_POST['address']);
+    // $state = mysqli_real_escape_string($conn, $_POST['state']);
+    // $district = mysqli_real_escape_string($conn, $_POST['district']);
+    // $pincode = mysqli_real_escape_string($conn, $_POST['pincode']);
+
+    $name =  $_POST['name'];
+    $email =  $_POST['email'];
+    $mobile =  $_POST['mobile'];
+    $password =  $_POST['password'];
+    $department =  $_POST['department'];
+    $address =  $_POST['address'];
+    $state =  $_POST['state'];
+    $district =  $_POST['district'];
+    $pincode =  $_POST['pincode'];
+    $status = $_POST['status'];
+    // Basic validation
+    if($name == ''){
+        die("❌ Name is required");
+    }
+
+    if($email == ''){
+        die("❌ Email is required");
+    }
+
+    if($mobile == ''){
+        die("❌ Mobile is required");
+    }
+
+    if($password == ''){
+        die("❌ Password is required");
+    }
+
+    if($department == ''){
+        die("❌ Department is required");
+    }
+
+    if($address == ''){
+        die("❌ Address is required");
+    }
+
+    if($state == ''){
+        die("❌ State is required");
+    }
+
+    if($district == ''){
+        die("❌ District is required");
+    }
+
+    if($pincode == ''){
+        die("❌ Pincode is required");
+    }
+
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        die("❌ Invalid email format");
+    }
+
+    if(!is_numeric($mobile) || strlen($mobile) != 10){
+        die("❌ Invalid mobile number");
+    }
+
+
+    $add_date = date("Y/m/d");
+    $add_time = date("h:i:s A");
+
+    $checksql = mysqli_query($conn, "SELECT * FROM employee WHERE email = '".$email."' || mobile = '".$mobile."'");
+    if(mysqli_num_rows($checksql)==0){
+        $sql = "INSERT INTO employee (unique_id, name, email, mobile, password, department, pan_card, addhar_card, ten_certficate, twelve_certficate, high_certificate, address, state, district, pincode, status, add_date, add_time) VALUES('$unique_id','$name','$email','$mobile','$password','$department','$pan_card','$addhar_card','$ten_certficate','$twelve_certficate','$high_certificate','$address','$state','$district','$pincode','$status','$add_date','$add_time')";
+
+        if(mysqli_query($conn, $sql)){
+            echo "✅ Employee Added Successfully!";
+        }else{
+            echo "❌ DB Error";
+        }
+    }
+    else{
+        echo "❌ All Fields are required";
+    }    
+
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -870,10 +1015,7 @@
             
             // Generate employee ID
             function generateEmployeeID() {
-                const prefix = 'EMP';
-                const randomNum = Math.floor(1000 + Math.random() * 9000);
-                const timestamp = Date.now().toString().slice(-4);
-                const uniqueId = `${prefix}-${randomNum}-${timestamp}`;
+                const uniqueId = `<?php echo $unique_id; ?>`;
                 document.getElementById('unique_id').value = uniqueId;
             }
             

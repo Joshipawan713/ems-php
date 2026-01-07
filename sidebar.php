@@ -18,7 +18,7 @@
             </a>
             <a href="show_employee.php" class="nav-link">
                 <i class="fas fa-users"></i>
-                <span class="nav-text">Show Employees</span>
+                <span class="nav-text">View Employees</span>
             </a>
             <a href="#" class="nav-link">
                 <i class="fas fa-building"></i>

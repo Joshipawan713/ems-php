@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3-1.el9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 05, 2026 at 06:20 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jan 07, 2026 at 11:39 AM
+-- Server version: 10.5.29-MariaDB
+-- PHP Version: 8.2.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `add_date`, `add_time`) VALUES
-(1, 'EMP-ADM-1', 'HR Admin', 'hr_admin@gmail.com', '9999999999', 'Vm0weE1GbFdiRmRXV0doVllteEtXRmx0ZEhkVlJscHpWMjFHV0ZKc2NIbFdWM1JMVlVaV1ZVMUVhejA9', '2026-01-02', '22:50:08');
+(1, 'EMP-ADM-1', 'HR Admin', 'hr_admin@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', '2026-01-02', '22:50:08');
 
 -- --------------------------------------------------------
 
@@ -237,6 +237,47 @@ CREATE TABLE `employee_salary` (
   `add_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `office_occasion`
+--
+
+CREATE TABLE `office_occasion` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `day` varchar(10) NOT NULL,
+  `month` varchar(10) NOT NULL,
+  `year` varchar(10) NOT NULL,
+  `added_by_id` varchar(100) NOT NULL,
+  `add_date` varchar(20) NOT NULL,
+  `add_time` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `office_occasion`
+--
+
+INSERT INTO `office_occasion` (`id`, `title`, `day`, `month`, `year`, `added_by_id`, `add_date`, `add_time`) VALUES
+(1, 'MAKAR SANKRANTI', '14', 'January', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(2, 'REPUBLIC DAY', '26', 'January', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(3, 'MAHA SHIVARATRI', '15', 'February', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(4, 'HOLI', '04', 'March', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(5, 'RAMANAVAMI', '26', 'March', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(6, 'DR.AMBEDKAR JAYANTI', '14', 'April', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(7, 'BUDDHA PURNIMA', '01', 'May', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(8, 'INDEPENDENCE DAY', '15', 'August', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(9, 'RAKSHA BANDHAN', '28', 'August', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(10, 'JANMASHTAMI', '04', 'September', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(11, 'GANDHI JAYANTI', '02', 'October', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(12, 'DUSSEHRA', '19', 'October', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(13, 'VIJAYA DASHAMI', '20', 'October', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(14, 'DIWALI', '08', 'November', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(15, 'GOVARDHAN PUJA', '09', 'November', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(16, 'BHAI DUI', '11', 'November', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(17, 'GURU NANAK BIRTHDAY', '24', 'November', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11'),
+(18, 'CHRISTMAS', '25', 'December', '2026', 'EMP-ADM-1', '2026-01-07', '14:23:11');
+
 --
 -- Indexes for dumped tables
 --
@@ -266,6 +307,12 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `office_occasion`
+--
+ALTER TABLE `office_occasion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -273,7 +320,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `attendance`
@@ -292,6 +339,12 @@ ALTER TABLE `dress_allot_emp`
 --
 ALTER TABLE `employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `office_occasion`
+--
+ALTER TABLE `office_occasion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
