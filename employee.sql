@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3-1.el9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 07, 2026 at 06:52 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jan 08, 2026 at 11:15 AM
+-- Server version: 10.5.29-MariaDB
+-- PHP Version: 8.2.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,7 +43,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `add_date`, `add_time`) VALUES
-(1, 'EMP-ADM-1', 'HR Admin', 'hr_admin@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', '2026-01-02', '22:50:08');
+(1, 'EMP-ADM-1', 'Admin', 'admin@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', '2026-01-02', '22:50:08');
 
 -- --------------------------------------------------------
 
@@ -52,13 +52,22 @@ INSERT INTO `admin` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `
 --
 
 CREATE TABLE `advance_payment` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `avd_pay_id` varchar(100) NOT NULL,
   `emp_id` varchar(100) NOT NULL,
   `amount` varchar(20) NOT NULL,
   `remarks` text NOT NULL,
+  `emp_salary_id` varchar(100) NOT NULL,
   `paid_date` varchar(20) NOT NULL,
   `paid_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `advance_payment`
+--
+
+INSERT INTO `advance_payment` (`id`, `avd_pay_id`, `emp_id`, `amount`, `remarks`, `emp_salary_id`, `paid_date`, `paid_time`) VALUES
+(1, 'EMP-AVD-PAY-1', 'EMP-USR-1', '2000', 'Adnace Payment For Testing Person', '0', '2026-01-08', '15:33:38');
 
 -- --------------------------------------------------------
 
@@ -213,6 +222,16 @@ CREATE TABLE `department` (
   `add_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`id`, `department`, `add_date`, `add_time`) VALUES
+(1, 'HR', '2026-01-08', '13:07:56'),
+(2, 'Driver', '2026-01-08', '13:08:24'),
+(3, 'GunMan', '2026-01-08', '13:08:24'),
+(4, 'Accountant', '2026-01-08', '13:08:24');
+
 -- --------------------------------------------------------
 
 --
@@ -221,12 +240,20 @@ CREATE TABLE `department` (
 
 CREATE TABLE `dress_allot_emp` (
   `id` int(11) NOT NULL,
+  `drs_alot_id` varchar(100) NOT NULL,
   `emp_id` varchar(100) NOT NULL,
   `dress_description` text NOT NULL,
   `handover_person_id` varchar(100) NOT NULL,
   `add_date` varchar(20) NOT NULL,
   `add_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `dress_allot_emp`
+--
+
+INSERT INTO `dress_allot_emp` (`id`, `drs_alot_id`, `emp_id`, `dress_description`, `handover_person_id`, `add_date`, `add_time`) VALUES
+(1, 'EMP-DRS-ALT-1', 'EMP-USR-1', '10-Paint,20-Shirt', 'EMP-ADM-1', '2026-01-08', '15:32:25');
 
 -- --------------------------------------------------------
 
@@ -252,9 +279,17 @@ CREATE TABLE `employee` (
   `district` varchar(100) NOT NULL,
   `pincode` varchar(10) NOT NULL,
   `status` enum('Active','Deactive','Rejoin') NOT NULL,
+  `add_by_id` varchar(100) NOT NULL,
   `add_date` varchar(20) NOT NULL,
   `add_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `department`, `pan_card`, `addhar_card`, `ten_certficate`, `twelve_certficate`, `high_certificate`, `address`, `state`, `district`, `pincode`, `status`, `add_by_id`, `add_date`, `add_time`) VALUES
+(1, 'EMP-USR-1', 'Testing', 'testing@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', 'Gun Man', '', '', '', '', '', 'Noida', 'Uttar Pradesh', 'Guatam Buddha Nagar', '201301', 'Active', 'EMP-ADM-1', '2026-01-08', '13:00:35');
 
 -- --------------------------------------------------------
 
@@ -264,6 +299,7 @@ CREATE TABLE `employee` (
 
 CREATE TABLE `employee_salary` (
   `id` int(11) NOT NULL,
+  `emp_salary_id` varchar(100) NOT NULL,
   `emp_id` varchar(100) NOT NULL,
   `basic_salary` varchar(30) NOT NULL,
   `epfo` varchar(30) NOT NULL,
@@ -276,6 +312,13 @@ CREATE TABLE `employee_salary` (
   `add_date` varchar(20) NOT NULL,
   `add_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `employee_salary`
+--
+
+INSERT INTO `employee_salary` (`id`, `emp_salary_id`, `emp_id`, `basic_salary`, `epfo`, `esi`, `conveyance`, `hra`, `total_salary`, `less_amount`, `total_amount_paid`, `add_date`, `add_time`) VALUES
+(1, 'EMP-2026-01-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-12-08', '13:07:19');
 
 -- --------------------------------------------------------
 
@@ -329,6 +372,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `advance_payment`
+--
+ALTER TABLE `advance_payment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `attendance`
 --
 ALTER TABLE `attendance`
@@ -359,6 +408,12 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `employee_salary`
+--
+ALTER TABLE `employee_salary`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `office_occasion`
 --
 ALTER TABLE `office_occasion`
@@ -373,6 +428,12 @@ ALTER TABLE `office_occasion`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `advance_payment`
+--
+ALTER TABLE `advance_payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `attendance`
@@ -390,19 +451,25 @@ ALTER TABLE `branch`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `dress_allot_emp`
 --
 ALTER TABLE `dress_allot_emp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `employee_salary`
+--
+ALTER TABLE `employee_salary`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `office_occasion`
