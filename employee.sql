@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 08, 2026 at 11:15 AM
+-- Generation Time: Jan 17, 2026 at 10:20 AM
 -- Server version: 10.5.29-MariaDB
 -- PHP Version: 8.2.29
 
@@ -270,14 +270,15 @@ CREATE TABLE `employee` (
   `password` varchar(250) NOT NULL,
   `department` varchar(100) NOT NULL,
   `pan_card` varchar(250) NOT NULL,
-  `addhar_card` varchar(250) NOT NULL,
-  `ten_certficate` varchar(250) NOT NULL,
-  `twelve_certficate` varchar(250) NOT NULL,
+  `aadhar_card` varchar(250) NOT NULL,
+  `ten_certificate` varchar(250) NOT NULL,
+  `twelve_certificate` varchar(250) NOT NULL,
   `high_certificate` varchar(250) NOT NULL,
   `address` text NOT NULL,
   `state` varchar(100) NOT NULL,
   `district` varchar(100) NOT NULL,
   `pincode` varchar(10) NOT NULL,
+  `branch_code` varchar(100) NOT NULL,
   `status` enum('Active','Deactive','Rejoin') NOT NULL,
   `add_by_id` varchar(100) NOT NULL,
   `add_date` varchar(20) NOT NULL,
@@ -288,8 +289,9 @@ CREATE TABLE `employee` (
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `department`, `pan_card`, `addhar_card`, `ten_certficate`, `twelve_certficate`, `high_certificate`, `address`, `state`, `district`, `pincode`, `status`, `add_by_id`, `add_date`, `add_time`) VALUES
-(1, 'EMP-USR-1', 'Testing', 'testing@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', 'Gun Man', '', '', '', '', '', 'Noida', 'Uttar Pradesh', 'Guatam Buddha Nagar', '201301', 'Active', 'EMP-ADM-1', '2026-01-08', '13:00:35');
+INSERT INTO `employee` (`id`, `unique_id`, `name`, `email`, `mobile`, `password`, `department`, `pan_card`, `aadhar_card`, `ten_certificate`, `twelve_certificate`, `high_certificate`, `address`, `state`, `district`, `pincode`, `branch_code`, `status`, `add_by_id`, `add_date`, `add_time`) VALUES
+(1, 'EMP-USR-1', 'Testing', 'testing@gmail.com', '9999999999', '827ccb0eea8a706c4c34a16891f84e7b', 'Gun Man', '1768370277_7271.png', '1768370277_1451.png', '1768370277_7061.png', '1768370277_3670.png', '1768370277_6446.png', 'Noida', 'Uttar Pradesh', 'Guatam Buddha Nagar', '201301', 'BC-2026-1', 'Active', 'EMP-ADM-1', '2026-01-08', '13:00:35'),
+(2, 'EMP-USR-2', 'Anahi Howell', 'your.email+fakedata95224@gmail.com', '3932649967', 'eFip7F6foYQiqM9', 'Human Resources', '1768370277_7271.png', '1768370277_1451.png', '1768370277_7061.png', '1768370277_3670.png', '1768370277_6446.png', '29002 Lourdes Road', 'Alabama', '1465 Towne Canyon', '200931', 'BC-2026-1', 'Active', 'EMP-ADM-1', '2026/01/14', '05:57:57 AM');
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,30 @@ CREATE TABLE `employee_salary` (
 --
 
 INSERT INTO `employee_salary` (`id`, `emp_salary_id`, `emp_id`, `basic_salary`, `epfo`, `esi`, `conveyance`, `hra`, `total_salary`, `less_amount`, `total_amount_paid`, `add_date`, `add_time`) VALUES
-(1, 'EMP-2026-01-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-12-08', '13:07:19');
+(1, 'EMP-2025-01-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-01-08', '13:07:19'),
+(2, 'EMP-2025-02-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-02-08', '13:07:19'),
+(3, 'EMP-2025-03-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-03-08', '13:07:19'),
+(4, 'EMP-2025-04-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-04-08', '13:07:19'),
+(5, 'EMP-2025-05-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-05-08', '13:07:19'),
+(6, 'EMP-2025-06-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-06-08', '13:07:19'),
+(7, 'EMP-2025-07-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-07-08', '13:07:19'),
+(8, 'EMP-2025-08-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-08-08', '13:07:19'),
+(9, 'EMP-2025-09-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-09-08', '13:07:19'),
+(10, 'EMP-2025-10-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-10-08', '13:07:19'),
+(11, 'EMP-2025-11-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-11-08', '13:07:19'),
+(12, 'EMP-2025-12-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2025-12-08', '13:07:19'),
+(13, 'EMP-2026-01-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-01-08', '13:07:19'),
+(14, 'EMP-2026-02-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-02-08', '13:07:19'),
+(15, 'EMP-2026-03-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-03-08', '13:07:19'),
+(16, 'EMP-2026-04-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-04-08', '13:07:19'),
+(17, 'EMP-2026-05-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-05-08', '13:07:19'),
+(18, 'EMP-2026-06-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-06-08', '13:07:19'),
+(19, 'EMP-2026-07-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-07-08', '13:07:19'),
+(20, 'EMP-2026-08-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-08-08', '13:07:19'),
+(21, 'EMP-2026-09-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-09-08', '13:07:19'),
+(22, 'EMP-2026-10-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-10-08', '13:07:19'),
+(23, 'EMP-2026-11-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-11-08', '13:07:19'),
+(24, 'EMP-2026-12-1', 'EMP-USR-1', '20000', '2500', '350', '0', '0', '22850', '0', '22850', '2026-12-08', '13:07:19');
 
 -- --------------------------------------------------------
 
@@ -463,13 +488,13 @@ ALTER TABLE `dress_allot_emp`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `employee_salary`
 --
 ALTER TABLE `employee_salary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `office_occasion`
